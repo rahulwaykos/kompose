@@ -1,15 +1,13 @@
 version: '3'
+
 services:
-  web:
-    image: example/my_web_app:latest
-    depends_on:
-      - db
-      - cache
+  app:
+    build: .
+    image: takacsmark/flask-redis:1.0
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - 5000:5000
 
-  db:
-    image: postgres:latest
-
-  cache:
-    image: redis:latest
-
-  
+  redis:
+    image: redis:4.0.11-alpine
